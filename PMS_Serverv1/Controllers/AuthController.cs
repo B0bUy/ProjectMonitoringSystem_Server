@@ -25,7 +25,7 @@ namespace PMS_Serverv1.Controllers
             try
             {
                 var registeredUser = await _authService.Register(user);
-                if(registeredUser == null)
+                if (registeredUser == null)
                     return BadRequest(new ApiResponse { StatusCode = 501, IsSuccess = false, Message = "Registration failed." });
                 return Ok(new ApiResponse { StatusCode = 200, IsSuccess = true, Message = "Registration successful." });
             }
@@ -41,8 +41,10 @@ namespace PMS_Serverv1.Controllers
             try
             {
                 var user = await _authService.Authenticate(request.Username, request.Password);
+                if (user is null)
+                    return Ok(new ApiResponse<string> { StatusCode = 500, IsSuccess = false, Message = "Log in Failed!", Result = string.Empty });
                 var token = _authService.GenerateJwtToken(user);
-                return Ok(new ApiResponse<string> { IsSuccess = true, Message = "You have successfully logged in!", Result = token});
+                return Ok(new ApiResponse<string> { StatusCode = 200, IsSuccess = true, Message = "You have successfully logged in!", Result = token });
             }
             catch (Exception ex)
             {

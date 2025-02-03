@@ -49,6 +49,7 @@ builder.Services.AddSwaggerGen(c =>
 
 
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IPackageService, PackageService>();
 
 var app = builder.Build();
 
