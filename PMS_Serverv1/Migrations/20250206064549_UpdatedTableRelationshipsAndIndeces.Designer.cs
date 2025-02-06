@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PMS_Serverv1.Data;
 
@@ -11,9 +12,11 @@ using PMS_Serverv1.Data;
 namespace PMS_Serverv1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250206064549_UpdatedTableRelationshipsAndIndeces")]
+    partial class UpdatedTableRelationshipsAndIndeces
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,6 +127,9 @@ namespace PMS_Serverv1.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<DateTime?>("DateCompleted")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime?>("Deadline")
                         .HasColumnType("datetime(6)");
 
@@ -153,7 +159,7 @@ namespace PMS_Serverv1.Migrations
 
                     b.HasIndex("PackageId");
 
-                    b.HasIndex("Name", "Description", "Deadline");
+                    b.HasIndex("Name", "Description", "DateCompleted", "Deadline");
 
                     b.ToTable("Projects");
                 });
@@ -256,6 +262,9 @@ namespace PMS_Serverv1.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<DateTime?>("DateStarted")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime?>("Deadline")
                         .HasColumnType("datetime(6)");
 
@@ -281,6 +290,9 @@ namespace PMS_Serverv1.Migrations
                     b.Property<Guid?>("ProjectId")
                         .HasColumnType("char(36)");
 
+                    b.Property<Guid?>("StatusId")
+                        .HasColumnType("char(36)");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -294,6 +306,8 @@ namespace PMS_Serverv1.Migrations
                     b.HasIndex("ParentTaskId");
 
                     b.HasIndex("ProjectId");
+
+                    b.HasIndex("StatusId");
 
                     b.HasIndex("Name", "Description", "Deadline");
 
@@ -399,11 +413,17 @@ namespace PMS_Serverv1.Migrations
                         .WithMany()
                         .HasForeignKey("ProjectId");
 
+                    b.HasOne("PMS_Serverv1.Entities.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId");
+
                     b.Navigation("Department");
 
                     b.Navigation("ParentTask");
 
                     b.Navigation("Project");
+
+                    b.Navigation("Status");
                 });
 #pragma warning restore 612, 618
         }

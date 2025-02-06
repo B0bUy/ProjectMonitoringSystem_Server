@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PMS_Serverv1.Data;
 
@@ -11,9 +12,11 @@ using PMS_Serverv1.Data;
 namespace PMS_Serverv1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250206061401_UpdatedProjectModelEntities")]
+    partial class UpdatedProjectModelEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,14 +49,14 @@ namespace PMS_Serverv1.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Description")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Logo")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
@@ -62,8 +65,6 @@ namespace PMS_Serverv1.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("DepartmentId");
-
-                    b.HasIndex("Name", "Description");
 
                     b.ToTable("Departments");
                 });
@@ -92,11 +93,11 @@ namespace PMS_Serverv1.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Description")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
@@ -105,8 +106,6 @@ namespace PMS_Serverv1.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("PackageId");
-
-                    b.HasIndex("Name", "Description");
 
                     b.ToTable("Packages");
                 });
@@ -124,6 +123,9 @@ namespace PMS_Serverv1.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<DateTime?>("DateCompleted")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime?>("Deadline")
                         .HasColumnType("datetime(6)");
 
@@ -134,11 +136,11 @@ namespace PMS_Serverv1.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Description")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<Guid>("PackageId")
                         .HasColumnType("char(36)");
@@ -152,8 +154,6 @@ namespace PMS_Serverv1.Migrations
                     b.HasKey("ProjectId");
 
                     b.HasIndex("PackageId");
-
-                    b.HasIndex("Name", "Description", "Deadline");
 
                     b.ToTable("Projects");
                 });
@@ -228,7 +228,7 @@ namespace PMS_Serverv1.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
@@ -237,8 +237,6 @@ namespace PMS_Serverv1.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("StatusId");
-
-                    b.HasIndex("Name");
 
                     b.ToTable("Status");
                 });
@@ -256,29 +254,27 @@ namespace PMS_Serverv1.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("Deadline")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("DeletedBy")
                         .HasColumnType("longtext");
 
-                    b.Property<Guid?>("DepartmentId")
+                    b.Property<Guid>("DepartmentId")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("varchar(255)");
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
-                    b.Property<Guid?>("ParentTaskId")
+                    b.Property<Guid>("ProjectId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("ProjectId")
+                    b.Property<Guid>("StatusId")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -291,11 +287,9 @@ namespace PMS_Serverv1.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.HasIndex("ParentTaskId");
-
                     b.HasIndex("ProjectId");
 
-                    b.HasIndex("Name", "Description", "Deadline");
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Task");
                 });
@@ -389,21 +383,27 @@ namespace PMS_Serverv1.Migrations
                 {
                     b.HasOne("PMS_Serverv1.Entities.Models.Department", "Department")
                         .WithMany()
-                        .HasForeignKey("DepartmentId");
-
-                    b.HasOne("PMS_Serverv1.Entities.Models.Task", "ParentTask")
-                        .WithMany()
-                        .HasForeignKey("ParentTaskId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("PMS_Serverv1.Entities.Models.Project", "Project")
                         .WithMany()
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PMS_Serverv1.Entities.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Department");
 
-                    b.Navigation("ParentTask");
-
                     b.Navigation("Project");
+
+                    b.Navigation("Status");
                 });
 #pragma warning restore 612, 618
         }
