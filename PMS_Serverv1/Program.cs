@@ -9,7 +9,7 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Add JWT Authentication
+// Add JWT Authentication   
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]);
 
@@ -50,6 +50,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<IPackageService, PackageService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
 
 var app = builder.Build();
 
@@ -60,6 +61,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "PMSv1_Server API v1");
+    }); 
+    app.UseReDoc(options =>
+    {
+        options.RoutePrefix = "redoc";
+        options.DocumentTitle = "API Documentation";
+        options.SpecUrl = "/swagger/v1/swagger.json";
     });
 }
 
