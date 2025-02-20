@@ -40,5 +40,70 @@ namespace PMS_Serverv1.Controllers
                 });
             }
         }
+        [HttpGet("get-project")]
+        public async Task<IActionResult> GetProject(string id)
+        {
+            try
+            {
+                Expression<Func<Project, bool>> filter = x => x.ProjectId == Guid.Parse(id);
+                var get_project = await _project.GetProject(filter);
+                if (get_project.IsSuccess)
+                    return Ok(get_project);
+                return BadRequest(get_project);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return BadRequest(new ApiResponse<Project>()
+                {
+                    StatusCode = 500,
+                    IsSuccess = false,
+                    Message = e.Message,
+                    Result = new()
+                });
+            }
+        }
+        [HttpPost("manage-project")]
+        public async Task<IActionResult> ManageProject(Project project)
+        {
+            try
+            {
+                var manage_project = await _project.TaskManageProject(project);
+                if (manage_project.IsSuccess)
+                    return Ok(manage_project);
+                return BadRequest(manage_project);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return BadRequest(new ApiResponse()
+                {
+                    StatusCode = 500,
+                    IsSuccess = false,
+                    Message = e.Message,
+                });
+            }
+        }
+        [HttpDelete("delete-project")]
+        public async Task<IActionResult> DeleteProject(string id)
+        {
+            try
+            {
+                var delete_project = await _project.DeleteProject(Guid.Parse(id));
+                if(delete_project.IsSuccess)
+                    return Ok(delete_project);
+                return BadRequest(delete_project);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return BadRequest(new ApiResponse()
+                {
+                    StatusCode = 500,
+                    IsSuccess = false,
+                    Message = e.Message,
+                });
+            }
+        }
     }
 }

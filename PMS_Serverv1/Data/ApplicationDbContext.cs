@@ -13,7 +13,7 @@ namespace PMS_Serverv1.Data
         public DbSet<Department> Departments { get; set; }
         public DbSet<ProjectStatus> ProjectStatus { get; set; }
         public DbSet<Status> Status { get; set; }
-        public DbSet<Entities.Models.Task> Task { get; set; }
+        public DbSet<Entities.Models.Task> Tasks { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }
