@@ -797,6 +797,16 @@
         <mxCell id="iNotNERDtQxTcPmXtUN7-121" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;Guid&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="210" y="320" width="30" height="20" as="geometry" />
         </mxCell>
+        <mxCell id="iNotNERDtQxTcPmXtUN7-125" style="edgeStyle=orthogonalEdgeStyle;shape=connector;curved=0;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;strokeColor=#10739e;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;startArrow=oval;startFill=1;endArrow=oval;endFill=1;fillColor=#b1ddf0;" edge="1" parent="1" source="iNotNERDtQxTcPmXtUN7-35" target="s1-EU_GbL1mds6aHtoGt-80">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="310" y="244" />
+              <mxPoint x="310" y="230" />
+              <mxPoint x="140" y="230" />
+              <mxPoint x="140" y="135" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
