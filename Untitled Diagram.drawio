@@ -673,22 +673,22 @@
         <mxCell id="iNotNERDtQxTcPmXtUN7-76" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;Guid&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
           <mxGeometry x="20" y="20" width="30" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="iNotNERDtQxTcPmXtUN7-77" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;TaskId&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
+        <mxCell id="iNotNERDtQxTcPmXtUN7-77" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;Name&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
           <mxGeometry x="50" y="40" width="60" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="iNotNERDtQxTcPmXtUN7-79" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;FK&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
+        <mxCell id="iNotNERDtQxTcPmXtUN7-79" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
           <mxGeometry y="40" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="iNotNERDtQxTcPmXtUN7-80" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;Guid&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
+        <mxCell id="iNotNERDtQxTcPmXtUN7-80" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;string&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
           <mxGeometry x="20" y="40" width="30" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="iNotNERDtQxTcPmXtUN7-81" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;StatusId&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
+        <mxCell id="iNotNERDtQxTcPmXtUN7-81" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
           <mxGeometry x="50" y="60" width="60" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="iNotNERDtQxTcPmXtUN7-82" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;FK&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
+        <mxCell id="iNotNERDtQxTcPmXtUN7-82" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
           <mxGeometry y="60" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="iNotNERDtQxTcPmXtUN7-83" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;Guid&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
+        <mxCell id="iNotNERDtQxTcPmXtUN7-83" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="iNotNERDtQxTcPmXtUN7-72">
           <mxGeometry x="20" y="60" width="30" height="20" as="geometry" />
         </mxCell>
       </root>
