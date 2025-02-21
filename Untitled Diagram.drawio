@@ -5,7 +5,7 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="s1-EU_GbL1mds6aHtoGt-2" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;PROJECT MONITORING AND MANAGEMENT SYSTEM (PMMS)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-425" y="30" width="790" height="57" as="geometry" />
+          <mxGeometry x="-425" y="20" width="790" height="57" as="geometry" />
         </mxCell>
         <mxCell id="s1-EU_GbL1mds6aHtoGt-74" value="" style="group;shadow=1;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="30" y="120" width="100" height="100" as="geometry" />
