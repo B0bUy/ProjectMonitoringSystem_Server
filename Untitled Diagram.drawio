@@ -184,7 +184,7 @@
         <mxCell id="s1-EU_GbL1mds6aHtoGt-94" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;PK&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="s1-EU_GbL1mds6aHtoGt-91" vertex="1">
           <mxGeometry y="20" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="s1-EU_GbL1mds6aHtoGt-95" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;string&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="s1-EU_GbL1mds6aHtoGt-91" vertex="1">
+        <mxCell id="s1-EU_GbL1mds6aHtoGt-95" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;Guid&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="s1-EU_GbL1mds6aHtoGt-91" vertex="1">
           <mxGeometry x="20" y="20" width="30" height="20" as="geometry" />
         </mxCell>
         <mxCell id="s1-EU_GbL1mds6aHtoGt-96" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;Name&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="s1-EU_GbL1mds6aHtoGt-91" vertex="1">
@@ -226,7 +226,7 @@
         <mxCell id="s1-EU_GbL1mds6aHtoGt-108" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;PK&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="s1-EU_GbL1mds6aHtoGt-119" vertex="1">
           <mxGeometry y="20" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="s1-EU_GbL1mds6aHtoGt-109" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;string&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="s1-EU_GbL1mds6aHtoGt-119" vertex="1">
+        <mxCell id="s1-EU_GbL1mds6aHtoGt-109" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;Guid&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="s1-EU_GbL1mds6aHtoGt-119" vertex="1">
           <mxGeometry x="20" y="20" width="30" height="20" as="geometry" />
         </mxCell>
         <mxCell id="s1-EU_GbL1mds6aHtoGt-110" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;ProjectId&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="s1-EU_GbL1mds6aHtoGt-119" vertex="1">
@@ -235,7 +235,7 @@
         <mxCell id="s1-EU_GbL1mds6aHtoGt-111" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;FK&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="s1-EU_GbL1mds6aHtoGt-119" vertex="1">
           <mxGeometry y="40" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="s1-EU_GbL1mds6aHtoGt-112" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;string&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="s1-EU_GbL1mds6aHtoGt-119" vertex="1">
+        <mxCell id="s1-EU_GbL1mds6aHtoGt-112" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;Guid&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="s1-EU_GbL1mds6aHtoGt-119" vertex="1">
           <mxGeometry x="20" y="40" width="30" height="20" as="geometry" />
         </mxCell>
         <mxCell id="s1-EU_GbL1mds6aHtoGt-113" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;StatusId&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="s1-EU_GbL1mds6aHtoGt-119" vertex="1">
@@ -244,7 +244,7 @@
         <mxCell id="s1-EU_GbL1mds6aHtoGt-114" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;FK&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="s1-EU_GbL1mds6aHtoGt-119" vertex="1">
           <mxGeometry y="60" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="s1-EU_GbL1mds6aHtoGt-115" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;string?&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="s1-EU_GbL1mds6aHtoGt-119" vertex="1">
+        <mxCell id="s1-EU_GbL1mds6aHtoGt-115" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;Guid?&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="s1-EU_GbL1mds6aHtoGt-119" vertex="1">
           <mxGeometry x="20" y="60" width="30" height="20" as="geometry" />
         </mxCell>
         <mxCell id="s1-EU_GbL1mds6aHtoGt-145" value="" style="group" parent="1" vertex="1" connectable="0">
