@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PMS_Serverv1.Data;
 
@@ -11,9 +12,11 @@ using PMS_Serverv1.Data;
 namespace PMS_Serverv1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250221133153_AddedNewTablesClientAndTaskRelatedEntities")]
+    partial class AddedNewTablesClientAndTaskRelatedEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -550,77 +553,6 @@ namespace PMS_Serverv1.Migrations
                     b.ToTable("UserTasks");
                 });
 
-            modelBuilder.Entity("PMS_Serverv1.Entities.UserManagement.Access", b =>
-                {
-                    b.Property<Guid>("AccessId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("AccessId");
-
-                    b.ToTable("Access");
-
-                    b.HasData(
-                        new
-                        {
-                            AccessId = new Guid("e0684bf4-d91b-4099-ac68-0bdbb9bc0a50"),
-                            CreatedAt = new DateTime(2025, 2, 21, 21, 58, 5, 173, DateTimeKind.Local).AddTicks(9061),
-                            CreatedBy = "",
-                            Name = "Read"
-                        },
-                        new
-                        {
-                            AccessId = new Guid("6141b753-bfc8-4af2-8912-4b2828459c2b"),
-                            CreatedAt = new DateTime(2025, 2, 21, 21, 58, 5, 173, DateTimeKind.Local).AddTicks(9086),
-                            CreatedBy = "",
-                            Name = "User"
-                        },
-                        new
-                        {
-                            AccessId = new Guid("eb6afbf8-63b0-46bd-bb21-ffec9f890fec"),
-                            CreatedAt = new DateTime(2025, 2, 21, 21, 58, 5, 173, DateTimeKind.Local).AddTicks(9088),
-                            CreatedBy = "",
-                            Name = "Encoder"
-                        },
-                        new
-                        {
-                            AccessId = new Guid("37426077-ccdf-4043-b7f1-5aef998f1a45"),
-                            CreatedAt = new DateTime(2025, 2, 21, 21, 58, 5, 173, DateTimeKind.Local).AddTicks(9089),
-                            CreatedBy = "",
-                            Name = "Contributor"
-                        },
-                        new
-                        {
-                            AccessId = new Guid("14772961-c4fc-4dcd-9a78-ef20ad55087f"),
-                            CreatedAt = new DateTime(2025, 2, 21, 21, 58, 5, 173, DateTimeKind.Local).AddTicks(9091),
-                            CreatedBy = "",
-                            Name = "Admin"
-                        });
-                });
-
             modelBuilder.Entity("PMS_Serverv1.Entities.UserManagement.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -668,46 +600,6 @@ namespace PMS_Serverv1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("PMS_Serverv1.Entities.UserManagement.UserAccess", b =>
-                {
-                    b.Property<Guid>("UserAccessId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("AccessId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("DeletedBy")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("longtext");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("UserAccessId");
-
-                    b.HasIndex("AccessId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserAccess");
                 });
 
             modelBuilder.Entity("PMS_Serverv1.Entities.Models.ClientInclusion", b =>
@@ -857,25 +749,6 @@ namespace PMS_Serverv1.Migrations
                         .IsRequired();
 
                     b.Navigation("Task");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("PMS_Serverv1.Entities.UserManagement.UserAccess", b =>
-                {
-                    b.HasOne("PMS_Serverv1.Entities.UserManagement.Access", "Access")
-                        .WithMany()
-                        .HasForeignKey("AccessId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PMS_Serverv1.Entities.UserManagement.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Access");
 
                     b.Navigation("User");
                 });

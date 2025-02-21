@@ -12,7 +12,7 @@ namespace PMS_Serverv1.Services
     {
         Task<ApiResponse<Entities.Models.Task>> GetTask(Guid taskId);
         Task<ApiResponse<List<Entities.Models.Task>>> GetTasks(List<FilterRequest> filter);
-        Task<ApiResponse> TaskManage(Entities.Models.Task task);
+        Task<ApiResponse> ManageTask(Entities.Models.Task task);
         Task<ApiResponse> DeleteTask(Guid id);
     }
 
@@ -74,7 +74,7 @@ namespace PMS_Serverv1.Services
                 };
             }
         }
-        public async Task<ApiResponse> TaskManage(Entities.Models.Task task)
+        public async Task<ApiResponse> ManageTask(Entities.Models.Task task)
         {
             try
             {

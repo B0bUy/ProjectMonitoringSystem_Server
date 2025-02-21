@@ -46,5 +46,39 @@ namespace PMS_Serverv1.Controllers
                 return BadRequest(e);
             }
         }
+
+        [HttpPost("manage-task")]
+        public async Task<IActionResult> ManageTask(Entities.Models.Task task)
+        {
+            try
+            {
+                var manage_tasks = await _task.ManageTask(task);
+                if (manage_tasks.IsSuccess)
+                    return Ok(manage_tasks);
+                return BadRequest(manage_tasks);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return BadRequest(e);
+            }
+        }
+
+        [HttpDelete("delete-task")]
+        public async Task<IActionResult> DeleteTask(string id)
+        {
+            try
+            {
+                var delete_task = await _task.DeleteTask(Guid.Parse(id));
+                if (delete_task.IsSuccess)
+                    return Ok(delete_task);
+                return BadRequest(delete_task);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return BadRequest(e);
+            }
+        }
     }
 }
