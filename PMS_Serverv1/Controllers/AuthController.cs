@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PMS_Serverv1.Data;
-using PMS_Serverv1.Entities.UserManagement;
+using PMSv1_Shared.Entities.UserManagement;
 using PMS_Serverv1.Services;
 using PMSv1_Shared.Entities.Contracts;
 

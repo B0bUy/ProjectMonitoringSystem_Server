@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PMS_Serverv1.Data;
-using PMS_Serverv1.Entities.UserManagement;
+using PMSv1_Shared.Entities.UserManagement;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

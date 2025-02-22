@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PMS_Serverv1.Data;
 
@@ -11,9 +12,11 @@ using PMS_Serverv1.Data;
 namespace PMS_Serverv1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250222025544_OverrideSnapshot")]
+    partial class OverrideSnapshot
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -485,6 +488,10 @@ namespace PMS_Serverv1.Migrations
                     b.Property<Guid?>("ProjectId")
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("TempProperty")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime?>("TimeLineEnd")
                         .HasColumnType("datetime(6)");
 
@@ -587,35 +594,35 @@ namespace PMS_Serverv1.Migrations
                         new
                         {
                             AccessId = new Guid("e0684bf4-d91b-4099-ac68-0bdbb9bc0a50"),
-                            CreatedAt = new DateTime(2025, 2, 22, 10, 57, 20, 50, DateTimeKind.Local).AddTicks(308),
+                            CreatedAt = new DateTime(2025, 2, 22, 10, 55, 43, 565, DateTimeKind.Local).AddTicks(2355),
                             CreatedBy = "",
                             Name = "Read"
                         },
                         new
                         {
                             AccessId = new Guid("6141b753-bfc8-4af2-8912-4b2828459c2b"),
-                            CreatedAt = new DateTime(2025, 2, 22, 10, 57, 20, 50, DateTimeKind.Local).AddTicks(332),
+                            CreatedAt = new DateTime(2025, 2, 22, 10, 55, 43, 565, DateTimeKind.Local).AddTicks(2381),
                             CreatedBy = "",
                             Name = "User"
                         },
                         new
                         {
                             AccessId = new Guid("eb6afbf8-63b0-46bd-bb21-ffec9f890fec"),
-                            CreatedAt = new DateTime(2025, 2, 22, 10, 57, 20, 50, DateTimeKind.Local).AddTicks(334),
+                            CreatedAt = new DateTime(2025, 2, 22, 10, 55, 43, 565, DateTimeKind.Local).AddTicks(2383),
                             CreatedBy = "",
                             Name = "Encoder"
                         },
                         new
                         {
                             AccessId = new Guid("37426077-ccdf-4043-b7f1-5aef998f1a45"),
-                            CreatedAt = new DateTime(2025, 2, 22, 10, 57, 20, 50, DateTimeKind.Local).AddTicks(335),
+                            CreatedAt = new DateTime(2025, 2, 22, 10, 55, 43, 565, DateTimeKind.Local).AddTicks(2385),
                             CreatedBy = "",
                             Name = "Contributor"
                         },
                         new
                         {
                             AccessId = new Guid("14772961-c4fc-4dcd-9a78-ef20ad55087f"),
-                            CreatedAt = new DateTime(2025, 2, 22, 10, 57, 20, 50, DateTimeKind.Local).AddTicks(337),
+                            CreatedAt = new DateTime(2025, 2, 22, 10, 55, 43, 565, DateTimeKind.Local).AddTicks(2387),
                             CreatedBy = "",
                             Name = "Admin"
                         });

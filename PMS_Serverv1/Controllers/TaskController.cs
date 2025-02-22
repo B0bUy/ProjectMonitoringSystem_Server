@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PMS_Serverv1.Services;
 using PMSv1_Shared.Entities.Filters.FilterModel;
+using PMSv1_Shared.Entities.Models;
 
 namespace PMS_Serverv1.Controllers
 {
@@ -48,7 +49,7 @@ namespace PMS_Serverv1.Controllers
         }
 
         [HttpPost("manage-task")]
-        public async Task<IActionResult> ManageTask(Entities.Models.Task task)
+        public async Task<IActionResult> ManageTask(Tasks task)
         {
             try
             {

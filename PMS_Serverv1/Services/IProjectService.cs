@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PMS_Serverv1.Data;
-using PMS_Serverv1.Entities.Models;
+using PMSv1_Shared.Entities.Models;
 using PMSv1_Shared.Entities.Contracts;
 using PMSv1_Shared.Entities.Filters.FilterModel;
-using PMSv1_Shared.Helpers;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace PMS_Serverv1.Services

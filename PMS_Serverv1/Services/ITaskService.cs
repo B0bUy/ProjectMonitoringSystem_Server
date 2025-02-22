@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PMS_Serverv1.Data;
-using PMS_Serverv1.Entities.Models;
+using PMSv1_Shared.Entities.Models;
 using PMSv1_Shared.Entities.Contracts;
 using PMSv1_Shared.Entities.Filters.FilterModel;
 using System.Linq.Expressions;
@@ -10,9 +10,9 @@ namespace PMS_Serverv1.Services
 {
     public interface ITaskService
     {
-        Task<ApiResponse<Entities.Models.Task>> GetTask(Guid taskId);
-        Task<ApiResponse<List<Entities.Models.Task>>> GetTasks(List<FilterRequest> filter);
-        Task<ApiResponse> ManageTask(Entities.Models.Task task);
+        Task<ApiResponse<Tasks>> GetTask(Guid taskId);
+        Task<ApiResponse<List<Tasks>>> GetTasks(List<FilterRequest> filter);
+        Task<ApiResponse> ManageTask(Tasks task);
         Task<ApiResponse> DeleteTask(Guid id);
     }
 
@@ -24,12 +24,12 @@ namespace PMS_Serverv1.Services
             _db = db;
         }
 
-        public async Task<ApiResponse<Entities.Models.Task>> GetTask(Guid taskId)
+        public async Task<ApiResponse<Tasks>> GetTask(Guid taskId)
         {
             try
             {
                 var get_task = await _db.Tasks.FindAsync(taskId);
-                return new ApiResponse<Entities.Models.Task>()
+                return new ApiResponse<Tasks>()
                 {
                     StatusCode = get_task != null ? 200 : 404,
                     IsSuccess = get_task != null,
@@ -40,7 +40,7 @@ namespace PMS_Serverv1.Services
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return new ApiResponse<Entities.Models.Task>()
+                return new ApiResponse<Tasks>()
                 {
                     StatusCode = 500,
                     IsSuccess = false,
@@ -49,12 +49,12 @@ namespace PMS_Serverv1.Services
                 };
             }
         }
-        public async Task<ApiResponse<List<Entities.Models.Task>>> GetTasks(List<FilterRequest> filter)
+        public async Task<ApiResponse<List<Tasks>>> GetTasks(List<FilterRequest> filter)
         {
             try
             {
                 var tasks = await FilterTasks(filter);
-                return new ApiResponse<List<Entities.Models.Task>>()
+                return new ApiResponse<List<Tasks>>()
                 {
                     StatusCode = tasks.Count > 0 ? 200 : 404,
                     IsSuccess = tasks.Count > 0,
@@ -65,7 +65,7 @@ namespace PMS_Serverv1.Services
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return new ApiResponse<List<Entities.Models.Task>>()
+                return new ApiResponse<List<Tasks>>()
                 {
                     StatusCode = 500,
                     IsSuccess = false,
@@ -74,7 +74,7 @@ namespace PMS_Serverv1.Services
                 };
             }
         }
-        public async Task<ApiResponse> ManageTask(Entities.Models.Task task)
+        public async Task<ApiResponse> ManageTask(Tasks task)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace PMS_Serverv1.Services
             }
         }
 
-        private async Task<ApiResponse> AddTask(Entities.Models.Task task)
+        private async Task<ApiResponse> AddTask(Tasks task)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace PMS_Serverv1.Services
                 return new ApiResponse() { StatusCode = 500, IsSuccess = false, Message = e.Message };
             }
         }
-        private async Task<ApiResponse> UpdateTask(Entities.Models.Task task)
+        private async Task<ApiResponse> UpdateTask(Tasks task)
         {
             try
             {
@@ -145,12 +145,12 @@ namespace PMS_Serverv1.Services
         
 
         [NonAction]
-        private async Task<List<Entities.Models.Task>> FilterTasks(List<FilterRequest> filter)
+        private async Task<List<Tasks>> FilterTasks(List<FilterRequest> filter)
         {
             try
             {
                 var projects = await _db.Projects.AsNoTracking().ToListAsync();
-                var filters = new List<Expression<Func<Entities.Models.Task, bool>>>()
+                var filters = new List<Expression<Func<Tasks, bool>>>()
                 {
                     x => filter.Any(c => c.FilterType == 0) ?  x.CreatedAt == DateTime.Parse(filter.FirstOrDefault(x => x.FilterType == 0)!.FilterValue) : true,
                     x => filter.Any(c => c.FilterType == 1) ?  x.Deadline == DateTime.Parse(filter.FirstOrDefault(x => x.FilterType == 1)!.FilterValue) : true,

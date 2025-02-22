@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PMS_Serverv1.Entities.Models;
-using PMS_Serverv1.Entities.UserManagement;
+using PMSv1_Shared.Entities.Models;
+using PMSv1_Shared.Entities.UserManagement;
 
 namespace PMS_Serverv1.Data
 {
@@ -13,8 +13,8 @@ namespace PMS_Serverv1.Data
         public DbSet<Department> Departments { get; set; }
         public DbSet<ProjectStatus> ProjectStatus { get; set; }
         public DbSet<Status> Status { get; set; }
-        public DbSet<Entities.Models.Task> Tasks { get; set; }
-        public DbSet<Entities.Models.TaskStatus> TaskStatus { get; set; }
+        public DbSet<Tasks> Tasks { get; set; }
+        public DbSet<PMSv1_Shared.Entities.Models.TaskStatus> TaskStatus { get; set; }
         public DbSet<UserTask> UserTasks { get; set; }
         public DbSet<ItemHistory> ItemHistories { get; set; }
         public DbSet<Client> Clients { get; set; }
