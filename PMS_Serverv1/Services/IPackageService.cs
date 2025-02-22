@@ -2,15 +2,16 @@
 using PMS_Serverv1.Data;
 using PMSv1_Shared.Entities.Models;
 using PMSv1_Shared.Entities.Contracts;
+using PMSv1_Shared.Entities.DTOs;
 
 namespace PMS_Serverv1.Services
 {
     public interface IPackageService
     {
-        Task<ApiResponse> ManagePackage(Package package);
+        Task<ApiResponse> ManagePackage(PackageDto package);
         Task<ApiResponse> DeletePackage(string packageId);
-        Task<ApiResponse<List<Package>>> GetPackages();
-        Task<ApiResponse<Package>> GetPackage(string guid);
+        Task<ApiResponse<List<PackageDto>>> GetPackages();
+        Task<ApiResponse<PackageDto>> GetPackage(string guid);
     }
 
     public class PackageService : IPackageService
@@ -21,11 +22,11 @@ namespace PMS_Serverv1.Services
             _db = db;
         }
 
-        public async Task<ApiResponse> ManagePackage(Package package)
+        public async Task<ApiResponse> ManagePackage(PackageDto package)
         {
             try
             {
-                if(package.PackageId == Guid.Empty)
+                if (package.PackageId == Guid.Empty)
                     return await AddPackage(package);
                 return await UpdatePackage(package);
             }
@@ -36,14 +37,20 @@ namespace PMS_Serverv1.Services
             }
         }
 
-        async Task<ApiResponse> AddPackage(Package package)
+        async Task<ApiResponse> AddPackage(PackageDto package)
         {
             try
             {
                 var getPackage = await _db.Packages.AsNoTracking().FirstOrDefaultAsync(p => p.Name.ToLower() == package.Name.ToLower());
                 if (getPackage is not null)
                     return new ApiResponse { StatusCode = 500, IsSuccess = false, Message = "Package already exists." };
-                await _db.Packages.AddAsync(package);
+                var newpackage = new Package
+                {
+                    Name = package.Name,
+                    Description = package.Description,
+                    Color = string.IsNullOrEmpty(package.Color) ? "#000000" : package.Color,
+                };
+                await _db.Packages.AddAsync(newpackage);
                 await _db.SaveChangesAsync();
                 return new ApiResponse { StatusCode = 200, IsSuccess = true, Message = "Package created successfully." };
             }
@@ -53,7 +60,7 @@ namespace PMS_Serverv1.Services
                 return new ApiResponse { StatusCode = 500, IsSuccess = false, Message = ex.Message };
             }
         }
-        async Task<ApiResponse> UpdatePackage(Package package)
+        async Task<ApiResponse> UpdatePackage(PackageDto package)
         {
             try
             {
@@ -64,7 +71,8 @@ namespace PMS_Serverv1.Services
                 if (packageExists is not null)
                     return new ApiResponse { StatusCode = 500, IsSuccess = false, Message = "Package already exists." };
                 getPackage.Name = package.Name;
-                getPackage.Color = package.Color;
+                getPackage.Description = package.Description;
+                getPackage.Color = string.IsNullOrEmpty(package.Color) ? "#000000" : package.Color;
                 _db.Packages.Update(getPackage);
                 await _db.SaveChangesAsync();
                 return new ApiResponse { StatusCode = 200, IsSuccess = true, Message = "Package Updated successfully." };
@@ -93,37 +101,62 @@ namespace PMS_Serverv1.Services
                 return new ApiResponse { StatusCode = 500, IsSuccess = false, Message = ex.Message };
             }
         }
-        public async Task<ApiResponse<List<Package>>> GetPackages()
+        public async Task<ApiResponse<List<PackageDto>>> GetPackages()
         {
             try
             {
                 var packages = await _db.Packages.AsNoTracking().ToListAsync();
-                if(packages is null || packages.Count() == 0)
-                    return new ApiResponse<List<Package>> { StatusCode = 500, IsSuccess = false, Message = "No packages found." };
-                return new ApiResponse<List<Package>> { StatusCode = 200, IsSuccess = true, Message = "Packages retrieved successfully.", Result = packages };
+                if (packages is null || packages.Count() == 0)
+                    return new ApiResponse<List<PackageDto>> { StatusCode = 500, IsSuccess = false, Message = "No packages found." };
+                return new ApiResponse<List<PackageDto>>
+                {
+                    StatusCode = 200,
+                    IsSuccess = true,
+                    Message = "Packages retrieved successfully.",
+                    Result = (from package in packages
+                              select new PackageDto
+                              {
+                                  PackageId = package.PackageId,
+                                  Name = package.Name,
+                                  Description = package.Description,
+                                  Color = package.Color,
+                              }).ToList(),
+                };
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new ApiResponse<List<Package>> { StatusCode = 500, IsSuccess = false, Message = ex.Message };
+                return new ApiResponse<List<PackageDto>> { StatusCode = 500, IsSuccess = false, Message = ex.Message };
             }
         }
-        public async Task<ApiResponse<Package>> GetPackage(string guid)
+        public async Task<ApiResponse<PackageDto>> GetPackage(string guid)
         {
             try
             {
                 var parseGuid = Guid.TryParse(guid, out Guid id);
                 if (!parseGuid)
-                    return new ApiResponse<Package> { StatusCode = 500, IsSuccess = false, Message = "Invalid package id." };
+                    return new ApiResponse<PackageDto> { StatusCode = 500, IsSuccess = false, Message = "Invalid package id." };
                 var packages = await _db.Packages.AsNoTracking().FirstOrDefaultAsync(c => c.PackageId == id);
-                if(packages is null)
-                    return new ApiResponse<Package> { StatusCode = 500, IsSuccess = false, Message = "No packages found." };
-                return new ApiResponse<Package> { StatusCode = 200, IsSuccess = true, Message = "Packages retrieved successfully.", Result = packages };
+                if (packages is null)
+                    return new ApiResponse<PackageDto> { StatusCode = 500, IsSuccess = false, Message = "No packages found." };
+                return new ApiResponse<PackageDto>
+                {
+                    StatusCode = 200,
+                    IsSuccess = true,
+                    Message = "Packages retrieved successfully.",
+                    Result = new PackageDto
+                    {
+                        PackageId = packages.PackageId,
+                        Name = packages.Name,
+                        Description = packages.Description,
+                        Color = packages.Color,
+                    },
+                };
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new ApiResponse<Package> { StatusCode = 500, IsSuccess = false, Message = ex.Message };
+                return new ApiResponse<PackageDto> { StatusCode = 500, IsSuccess = false, Message = ex.Message };
             }
         }
     }

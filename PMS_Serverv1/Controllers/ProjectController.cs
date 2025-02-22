@@ -68,7 +68,7 @@ namespace PMS_Serverv1.Controllers
         {
             try
             {
-                var manage_project = await _project.TaskManageProject(project);
+                var manage_project = await _project.ManageProject(project);
                 if (manage_project.IsSuccess)
                     return Ok(manage_project);
                 return BadRequest(manage_project);

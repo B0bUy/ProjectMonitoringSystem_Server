@@ -5,6 +5,7 @@ using PMSv1_Shared.Entities.Models;
 using PMSv1_Shared.Entities.Contracts;
 using PMSv1_Shared.Entities.Filters.FilterModel;
 using System.Linq.Expressions;
+using PMSv1_Shared.Helpers;
 
 namespace PMS_Serverv1.Services
 {
@@ -12,7 +13,7 @@ namespace PMS_Serverv1.Services
     {
         Task<ApiResponse<Project>> GetProject(Expression<Func<Project, bool>> filter);
         Task<ApiResponse<List<Project>>> GetProjects(List<FilterRequest> filter);
-        Task<ApiResponse> TaskManageProject(Project project);
+        Task<ApiResponse> ManageProject(Project project);
         Task<ApiResponse> DeleteProject(Guid projectId);
     }
 
@@ -40,13 +41,7 @@ namespace PMS_Serverv1.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new ApiResponse<Project>()
-                {
-                    StatusCode = 500,
-                    IsSuccess = false,
-                    Message = ex.Message,
-                    Result = new()
-                };
+                return ExceptionHandler.Handle<Project>(ex);
             }
         }
         public async Task<ApiResponse<List<Project>>> GetProjects(List<FilterRequest> filter)
@@ -65,16 +60,10 @@ namespace PMS_Serverv1.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new ApiResponse<List<Project>>()
-                {
-                    StatusCode = 500,
-                    IsSuccess = false,
-                    Message = ex.Message,
-                    Result = new()
-                };
+                return ExceptionHandler.Handle<List<Project>>(ex);
             }
         }
-        public async Task<ApiResponse> TaskManageProject(Project project)
+        public async Task<ApiResponse> ManageProject(Project project)
         {
             try
             {
@@ -85,7 +74,7 @@ namespace PMS_Serverv1.Services
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return new ApiResponse() { StatusCode = 500, IsSuccess = false, Message = e.Message };    
+                return ExceptionHandler.Handle(e);
             }
         }
         private async Task<ApiResponse> AddProject(Project project)
@@ -102,7 +91,7 @@ namespace PMS_Serverv1.Services
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return new ApiResponse() { StatusCode = 500, IsSuccess = false, Message = e.Message };
+                return ExceptionHandler.Handle(e);
             }
         }
         private async Task<ApiResponse> UpdateProject(Project project)
@@ -120,7 +109,7 @@ namespace PMS_Serverv1.Services
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return new ApiResponse() { StatusCode = 500, IsSuccess = false, Message = e.Message };
+                return ExceptionHandler.Handle(e);
             }
         }
         public async Task<ApiResponse> DeleteProject(Guid projectId)
@@ -137,7 +126,7 @@ namespace PMS_Serverv1.Services
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return new ApiResponse() { StatusCode = 500, IsSuccess = false, Message = e.Message };
+                return ExceptionHandler.Handle(e);
             }
         }
 

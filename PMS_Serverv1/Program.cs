@@ -52,6 +52,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<IPackageService, PackageService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddScoped<IClientService, ClientService>();
 
 var app = builder.Build();
 

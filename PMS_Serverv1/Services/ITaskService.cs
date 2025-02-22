@@ -5,6 +5,7 @@ using PMSv1_Shared.Entities.Models;
 using PMSv1_Shared.Entities.Contracts;
 using PMSv1_Shared.Entities.Filters.FilterModel;
 using System.Linq.Expressions;
+using PMSv1_Shared.Helpers;
 
 namespace PMS_Serverv1.Services
 {
@@ -40,13 +41,7 @@ namespace PMS_Serverv1.Services
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return new ApiResponse<Tasks>()
-                {
-                    StatusCode = 500,
-                    IsSuccess = false,
-                    Message = e.Message,
-                    Result = new(),
-                };
+                return ExceptionHandler.Handle<Tasks>(e);
             }
         }
         public async Task<ApiResponse<List<Tasks>>> GetTasks(List<FilterRequest> filter)
@@ -65,13 +60,7 @@ namespace PMS_Serverv1.Services
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return new ApiResponse<List<Tasks>>()
-                {
-                    StatusCode = 500,
-                    IsSuccess = false,
-                    Message = e.Message,
-                    Result = new(),
-                };
+                return ExceptionHandler.Handle<List<Tasks>>(e);
             }
         }
         public async Task<ApiResponse> ManageTask(Tasks task)
@@ -121,7 +110,7 @@ namespace PMS_Serverv1.Services
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return new ApiResponse() { StatusCode = 500, IsSuccess = false, Message = e.Message };
+                return ExceptionHandler.Handle(e); 
             }
         }
         public async Task<ApiResponse> DeleteTask(Guid id)
@@ -137,9 +126,8 @@ namespace PMS_Serverv1.Services
             }
             catch (Exception e)
             {
-
                 Console.WriteLine(e.Message);
-                return new ApiResponse() { StatusCode = 500, IsSuccess = false, Message = e.Message };
+                return ExceptionHandler.Handle(e);
             }
         }
         

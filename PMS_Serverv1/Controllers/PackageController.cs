@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PMSv1_Shared.Entities.Models;
 using PMS_Serverv1.Services;
 using PMSv1_Shared.Entities.Contracts;
+using PMSv1_Shared.Entities.DTOs;
 
 namespace PMS_Serverv1.Controllers
 {
@@ -35,9 +35,9 @@ namespace PMS_Serverv1.Controllers
             try
             {
                 var package = await _package.GetPackages();
-                if (package is null)
-                    return BadRequest(new ApiResponse { StatusCode = 500, IsSuccess = false, Message = "Package not found." });
-                return Ok(new ApiResponse<List<Package>> { StatusCode = 200, IsSuccess = true, Message = "Package found.", Result = package.Result });
+                if (package.IsSuccess)
+                    return Ok(package);
+                return BadRequest(package);
             }
             catch (Exception ex)
             {
@@ -46,14 +46,14 @@ namespace PMS_Serverv1.Controllers
         }
 
         [HttpPost("manage-package")]
-        public async Task<IActionResult> ManagePackage(Package package)
+        public async Task<IActionResult> ManagePackage(PackageDto package)
         {
             try
             {
                 var result = await _package.ManagePackage(package);
-                if (result is null)
-                    return BadRequest(new ApiResponse { StatusCode = 500, IsSuccess = false, Message = "Package not found." });
-                return Ok(result);
+                if (result.IsSuccess)
+                    return Ok(result);
+                return BadRequest(result);
             }
             catch (Exception ex)
             {
@@ -67,9 +67,9 @@ namespace PMS_Serverv1.Controllers
             try
             {
                 var result = await _package.DeletePackage(packageId);
-                if (result is null)
-                    return BadRequest(new ApiResponse { StatusCode = 500, IsSuccess = false, Message = "Package not found." });
-                return Ok(result);
+                if (result.IsSuccess)
+                    return Ok(result);
+                return BadRequest(result);
             }
             catch (Exception ex)
             {
