@@ -85,7 +85,8 @@ namespace PMS_Serverv1.Services
                                  Description = client.Description,
                                  Logo = client.Logo,
                                  Color = client.Color,
-                             }).ToList(),
+                                 CreatedAt = client.CreatedAt,
+                             }).OrderBy(c => c.UpdatedAt.HasValue ? c.UpdatedAt.Value : c.CreatedAt).ToList(),
                 };
             }
             catch (Exception e)
@@ -139,7 +140,7 @@ namespace PMS_Serverv1.Services
                 if (get_client == null)
                     return new ApiResponse() { StatusCode = 500, IsSuccess = false, Message = "Client does not exists." };
                 var is_existing = await _db.Clients.AsNoTracking().FirstOrDefaultAsync(c => c.Name == client.Name);
-                if (is_existing != null)
+                if (is_existing != null && get_client.Name != is_existing.Name)
                     return new ApiResponse() { StatusCode = 500, IsSuccess = false, Message = "Client already exists." };
                 get_client.Name = client.Name;
                 get_client.Description = client.Description;
